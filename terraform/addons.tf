@@ -194,46 +194,8 @@ module "data_addons" {
   aws_efa_k8s_device_plugin_helm_config = {
     values = [file("${path.module}/helm-values/aws-efa-k8s-device-plugin-values.yaml")]
   }
-
-  depends_on = [
-    kubernetes_secret_v1.huggingface_token,
-    kubernetes_config_map_v1.notebook
-  ]
 }
 
-
-#---------------------------------------------------------------
-# Additional Resources
-#---------------------------------------------------------------
-
-resource "kubernetes_namespace_v1" "jupyterhub" {
-  metadata {
-    name = "jupyterhub"
-  }
-}
-
-
-resource "kubernetes_secret_v1" "huggingface_token" {
-  metadata {
-    name      = "hf-token"
-    namespace = kubernetes_namespace_v1.jupyterhub.id
-  }
-
-  data = {
-    token = var.huggingface_token
-  }
-}
-
-resource "kubernetes_config_map_v1" "notebook" {
-  metadata {
-    name      = "notebook"
-    namespace = kubernetes_namespace_v1.jupyterhub.id
-  }
-
-  data = {
-    "dogbooth.ipynb" = file("${path.module}/src/notebook/dogbooth.ipynb")
-  }
-}
 
 #---------------------------------------------------------------
 # Grafana Admin credentials resources
