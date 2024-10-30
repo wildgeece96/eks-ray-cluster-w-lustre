@@ -32,12 +32,6 @@ variable "secondary_cidr_blocks" {
   type        = list(string)
 }
 
-variable "huggingface_token" {
-  description = "Hugging Face Secret Token"
-  type        = string
-  default     = "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"
-  sensitive   = true
-}
 
 variable "enable_aws_efa_k8s_device_plugin" {
   description = "Enable AWS EFA K8s Device Plugin"
