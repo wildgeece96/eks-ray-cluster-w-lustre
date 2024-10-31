@@ -108,24 +108,6 @@ module "eks_blueprints_addons" {
     values = [templatefile("${path.module}/helm-values/ingress-nginx-values.yaml", {})]
   }
 
-  #---------------------------------------
-  # Karpenter Autoscaler for EKS Cluster
-  #---------------------------------------
-  enable_karpenter                  = true
-  karpenter_enable_spot_termination = true
-  karpenter_node = {
-    iam_role_additional_policies = {
-      AmazonSSMManagedInstanceCore = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-    }
-  }
-  karpenter = {
-    chart_version       = "0.37.0"
-    repository_username = data.aws_ecrpublic_authorization_token.token.user_name
-    repository_password = data.aws_ecrpublic_authorization_token.token.password
-    source_policy_documents = [
-      data.aws_iam_policy_document.karpenter_controller_policy.json
-    ]
-  }
 
   #---------------------------------------
   # CloudWatch metrics for EKS
