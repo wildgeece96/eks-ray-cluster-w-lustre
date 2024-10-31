@@ -25,7 +25,7 @@ resource "aws_fsx_lustre_file_system" "this" {
 resource "aws_fsx_data_repository_association" "this" {
 
   file_system_id       = aws_fsx_lustre_file_system.this.id
-  data_repository_path = "s3://20241030-jark-stack-sohoha" # for us-east-1
+  data_repository_path = "s3://xxxxxxx"
   file_system_path     = "/data"                           # This directory will be used in Spark podTemplates under volumeMounts as subPath
 
   s3 {
