@@ -57,7 +57,7 @@ subnet_ids = ["subnet-xxxxx"]  # ここの値
 # If you are using a Capacity Reservation, the Subnet for the instances must match AZ for the reservation.
 capacity_reservation_specification = {
 capacity_reservation_target = {
-    capacity_reservation_id = "cr-0498091fd0522c240"
+    capacity_reservation_id = "cr-xxxxxxxx"
 }
 }
 ```
@@ -68,5 +68,3 @@ terraform apply \
 --auto-approve
 ```
 
-## 作業メモ
-- スループットがなぜか 50, 100, 200 MB/s/TiB になっていた
